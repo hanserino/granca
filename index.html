@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Granca Training Camp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="reset.css" />
+
+    <style>
+        body{
+            padding: 0 0 2rem 0;
+        }
+
+        h1{
+            font-family: Helvetica, sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        #mapList {
+            list-style: none;  
+            text-align: center;         
+        }
+
+        #mapList li {
+            display: inline-block;
+            padding: 1rem;
+            position: relative;
+        }
+        #mapList iframe {
+            position: relative;
+            z-index: 2;
+            background-color: transparent !Important;
+        }
+
+        .spinner{
+            position: absolute;
+            left: 0;
+            width: 100%;
+            top: 160px;
+            opacity: .5;
+        }
+
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 51px;
+            height: 51px;
+            margin: 6px;
+            border: 6px solid #000;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #000 transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Granca training camp resources</h1>
+    
+    <ul id="mapList"></ul>
+
+    <script>
+        var mapIds = [
+            "OGnOwidUgcW8eaZjhzWb9Eaj",
+            "OCU9jm9vC0Bhx75CfBblz3P2",
+            "SNbLP4yePvzalFLiHUeLjcLO",
+            "b73jSnQUXLByyY58IQ246OzJ",
+            "DvLiWrTMn0AyJC76c6fQBCeX",
+            "E647xrZttvBb2e1voIFxGHeu",
+            "f8Ag0JJuF6d1rQe0wDzLPObB",
+            "JwbhpKocxeyLvjQCI64EVWgw",
+            "E647xrZttvBb2e1voIFxGHeu",
+            "5xQpCbhY48dwtw0mOVNEFVZQ",
+            "cmdqReKKUcihSnUqWSVJVUsC",
+            "6PmB9pasTNVrQRNtahx6dJyc"
+        ]
+
+        function init(){
+            const mapListEl = document.getElementById("mapList");
+
+            function mapGenerator(mapId){
+                return `<li><div class="spinner"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div><iframe id="${mapId}" src='https://www.gaiagps.com/public/${mapId}?embed=True' style='border:none; overflow-y: hidden; background-color:white; min-width: 320px; max-width:420px; width:100%; height: 420px;' scrolling='no' seamless='seamless'></iframe></li>`;
+            }
+
+            for(var i = 0; i < mapIds.length; i++){
+                mapListEl.innerHTML += mapGenerator(mapIds[i]);
+            }
+           
+        }
+
+        window.addEventListener('load', function () {
+            init();
+            document.body.setAttribute('data-loaded', 'true');
+        });
+
+    </script>
+</body>
+</html>
